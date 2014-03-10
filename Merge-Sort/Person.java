@@ -15,7 +15,7 @@ public class Person implements Comparable<Person>{
     }
    
     public int compareTo(Person other){
-	return name.compareTo(other.getName());
+	return getName().compareTo(other.getName());
     }
 
 }
