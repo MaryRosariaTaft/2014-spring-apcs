@@ -27,16 +27,16 @@ public class QuickSelect{
 	//Non-destructive
 	//Apparently doesn't work
 	//separate off elements equal to the pivotNum to avoid duplicate issues--just an optimization
-	int pivotInitialIndex=front+rand.nextInt(back-front), pivotNum=L[pivotInitialIndex], frontIndex=left, backIndex=right, temp=0;
+	int frontIndex=left, backIndex=right, temp=0, pivotInitialIndex=frontIndex+rand.nextInt(backIndex-frontIndex), pivotNum=L[pivotInitialIndex];
 	temp=pivotNum;
 	L[pivotInitialIndex]=L[backIndex];
 	L[backIndex]=temp;
 	backIndex--;
-	for(int i=left;i<=right;i++){
+	for(int i=left;i<right;i++){
 	    if(L[i]<=pivotNum){//so, the pivotNum will reside on the left partitioned piece of the array
-		temp=L[frontIndex];
-		L[frontIndex]=L[i];
-		L[i]=temp;
+		// temp=L[frontIndex];
+		// L[frontIndex]=L[i];
+		// L[i]=temp;
 		frontIndex++;
 	    }else{
 		temp=L[backIndex];
@@ -48,7 +48,6 @@ public class QuickSelect{
 	temp=L[frontIndex];
 	L[frontIndex]=L[right];
 	L[right]=temp;
-	System.out.println(L);
 	return frontIndex;
 	
 	//throw the pivotNum value at the front or back
@@ -72,15 +71,11 @@ public class QuickSelect{
     }
 
     public static void main(String[] args){
-	//     unsorted array
-	int[] a = {8,3,7,12,65,7,33,9,26,542, 7,123, 0, 6};
-	//indecies 0 1 2  3  4 5  6 7  8   9 10  11 12 13
-	//     sorted array
-	//         0,3,6,7,7,7,8,9,12,26,33,65,123,542
-	//indecies 0 1 2 3 4 5 6 7  8  9 10 11  12  13
-	System.out.println(partition(a,0,a.length-1));
-	System.out.println("\n"+Arrays.toString(a));
-	// System.out.println(quickselect(a,13));
+	int[] a = {9,8,7,6,5,4,3,2,1,0};
+	System.out.println("Original array: "+Arrays.toString(a));
+	System.out.println("Partition index: "+partition(a,0,a.length-1));
+	System.out.println("Partitid array: "+Arrays.toString(a));
+	// System.out.println(quickselect(a,6));
    }
 
 }
