@@ -47,40 +47,79 @@ public class QuickSelect{
     //if bigger, at end
     //return middle pivot
     //[0,1,1,1,(1),1,1,1,1,7,8]
+
     public static int partition(int[] L, int left, int right){
-	//random partition number
-	int frontIndex=left, temp=0, pivotInitialIndex=left+rand.nextInt(right-left), pivotNum=L[pivotInitialIndex];
-	//store the pivot at end
-	temp=pivotNum;
-	L[pivotInitialIndex]=L[right];
-	L[right]=temp;
-	//push elements greater than pivotNum to the right
-	for(int i=left;i<right;i++){
-	    if(L[i]<=pivotNum){
-	    	temp=L[frontIndex];
-	    	L[frontIndex]=L[i];
-	    	L[i]=temp;
-	    	frontIndex++;
+    	//random partition number
+    	int frontIndex=left, backIndex=right, temp=0, pivotInitialIndex=left+rand.nextInt(right-left), pivotNum=L[pivotInitialIndex];
+    	//store the pivot at end
+    	temp=pivotNum;
+    	L[pivotInitialIndex]=L[backIndex];
+    	L[backIndex]=temp;
+	backIndex--;
+    	//push elements greater than pivotNum to the right
+    	for(int i=left;i<right;i++){
+    	    if(L[i]<pivotNum){
+    	    	temp=L[frontIndex];
+    	    	L[frontIndex]=L[i];
+    	    	L[i]=temp;
+    	    	frontIndex++;
+    	    }else if(L[i]==pivotNum){
+		temp=L[backIndex];
+		L[backIndex]=L[i];
+		L[i]=temp;
+		backIndex--;
 	    }
-	}
-	//put the pivot back where it belongs
-	temp=L[frontIndex];
-	L[frontIndex]=L[right];
-	L[right]=temp;
-	return frontIndex;
+    	}
+    	//put the pivot(s) back where it(/they) belongs
+	// for(int i=backIndex+1;i<=right;i++){
+	//     temp=L[frontIndex];
+	//     L[frontIndex]=L[i];
+	//     L[i]=temp;
+	//     frontIndex++;
+	// }
+
+
+    	temp=L[frontIndex];
+    	L[frontIndex]=L[right];
+    	L[right]=temp;
+    	return frontIndex;
     }
 
+
+    // public static int partition(int[] L, int left, int right){
+    // 	//random partition number
+    // 	int frontIndex=left, temp=0, pivotInitialIndex=left+rand.nextInt(right-left), pivotNum=L[pivotInitialIndex];
+    // 	//store the pivot at end
+    // 	temp=pivotNum;
+    // 	L[pivotInitialIndex]=L[right];
+    // 	L[right]=temp;
+    // 	//push elements greater than pivotNum to the right
+    // 	for(int i=left;i<right;i++){
+    // 	    if(L[i]<=pivotNum){
+    // 	    	temp=L[frontIndex];
+    // 	    	L[frontIndex]=L[i];
+    // 	    	L[i]=temp;
+    // 	    	frontIndex++;
+    // 	    }
+    // 	}
+    // 	//put the pivot back where it belongs
+    // 	temp=L[frontIndex];
+    // 	L[frontIndex]=L[right];
+    // 	L[right]=temp;
+    // 	return frontIndex;
+    // }
+
     public static void main(String[] args){
-	int[] a = {7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
-	// System.out.println("Original array: "+Arrays.toString(a));
-	// int pos=partition(a,0,a.length-1);
-	// System.out.println("Pivot index: "+pos);
-	// System.out.println("Partitioned array: "+Arrays.toString(a));
+	int[] a = {2,2,2,2,2,2,2,1,2,2,2,2,2,3,2,2};  //{7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
+	System.out.println("Original array: "+Arrays.toString(a));
+	int pos=partition(a,0,a.length-1);
+	System.out.println("Pivot index: "+pos);
+	System.out.println("Partitioned array: "+Arrays.toString(a));
 
-	System.out.println("6th smallest element of array: "+quickselect(a,6));
+	// System.out.println("6th smallest element of array: "+quickselect(a,6));
 
-	quicksort(a);
-	System.out.println(Arrays.toString(a));
+	// quicksort(a);
+	// System.out.println(Arrays.toString(a));
    }
 
 }
