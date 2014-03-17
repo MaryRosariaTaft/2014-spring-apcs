@@ -3,7 +3,7 @@ import java.util.*;
 
 //runtime: n+(n/2)+(n/4)+(n/8)+... = n+n = 2n = O(n)
 
-public class QuickSelect{
+public class QuickSort{
 
     private static Random rand = new Random();
 
@@ -50,26 +50,40 @@ public class QuickSelect{
 
     public static int partition(int[] L, int left, int right){
     	//random partition number
-    	int frontIndex=left, backIndex=right, temp=0, pivotInitialIndex=left+rand.nextInt(right-left), pivotNum=L[pivotInitialIndex];
-    	//store the pivot at end
-    	temp=pivotNum;
-    	L[pivotInitialIndex]=L[backIndex];
-    	L[backIndex]=temp;
-	backIndex--;
-    	//push elements greater than pivotNum to the right
-    	for(int i=left;i<right;i++){
-    	    if(L[i]<pivotNum){
-    	    	temp=L[frontIndex];
-    	    	L[frontIndex]=L[i];
-    	    	L[i]=temp;
-    	    	frontIndex++;
-    	    }else if(L[i]==pivotNum){
-		temp=L[backIndex];
-		L[backIndex]=L[i];
-		L[i]=temp;
+    	int frontIndex=left, backIndex=right, temp=0, pivotInitialIndex=left+rand.nextInt(right-left), pivotNum=L[pivotInitialIndex]; //, i=left;
+
+	for(int i=left;i<=right;i++){
+	    if(L[i]>pivotNum){
+		temp=L[i];
+		L[i]=L[backIndex];
+		L[backIndex]=temp;
 		backIndex--;
+	    }else if(L[i]<pivotNum){
+		temp=L[i];
+		L[i]=L[frontIndex];
+		L[frontIndex]=temp;
+		frontIndex++;
 	    }
-    	}
+	}
+
+	// while(frontIndex!=backIndex&&i<=right){
+	//     if(L[i]>pivotNum){
+	// 	temp=L[i];
+	// 	L[i]=L[backIndex];
+	// 	L[backIndex]=temp;
+	// 	backIndex--;
+	//     }else if(L[i]<pivotNum){
+	// 	temp=L[i];
+	// 	L[i]=L[frontIndex];
+	// 	L[frontIndex]=temp;
+	// 	frontIndex++;
+	//     }else{
+	// 	i++;
+	//     }
+	// }
+
+	return frontIndex;
+
     	//put the pivot(s) back where it(/they) belongs
 	// for(int i=backIndex+1;i<=right;i++){
 	//     temp=L[frontIndex];
@@ -78,11 +92,6 @@ public class QuickSelect{
 	//     frontIndex++;
 	// }
 
-
-    	temp=L[frontIndex];
-    	L[frontIndex]=L[right];
-    	L[right]=temp;
-    	return frontIndex;
     }
 
 
@@ -110,7 +119,10 @@ public class QuickSelect{
     // }
 
     public static void main(String[] args){
-	int[] a = {2,2,2,2,2,2,2,1,2,2,2,2,2,3,2,2};  //{7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
+	// int[] a = {0,1,2,3,4,5,6,7,8,9};
+	int[] a = {9,8,7,6,5,4,3,2,1,0};
+	// int[] a = {2,2,2,2,2,2,2,1,2,2,2,2,2,3,2,2};
+	// int[] a = {7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
 	System.out.println("Original array: "+Arrays.toString(a));
 	int pos=partition(a,0,a.length-1);
 	System.out.println("Pivot index: "+pos);
