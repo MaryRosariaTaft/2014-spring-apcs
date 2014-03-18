@@ -12,8 +12,8 @@ public class QuickSort{
     }
 
     public static void quicksort(int[]L,int left,int right){
-	//don't run if length is 0 or 1
-	if(right-left>=2){	   
+	//stop recursion when length is 0 or 1
+	if(right-left+1>1){	   
 	    int pivotIndex=partition(L,left,right);
 	    //sort each "half"
 	    quicksort(L,left,pivotIndex-1);
@@ -49,11 +49,11 @@ public class QuickSort{
 	int start=frontIndex,
 	    end=frontIndex;
 
-	//push numbers bigger than pivotNum to the back
+	//move duplicates of pivotNum to the beginning of the right side of the partition
 	for(int i=frontIndex;i<=right;i++){
 	    if(L[i]==pivotNum){
 		swap(L,frontIndex,i);
-		end=frontIndex;
+		end=frontIndex; //find the index of the last duplicate of pivotNum
 		frontIndex++;
 	    }
 	    //System.out.println(Arrays.toString(L));
@@ -61,12 +61,13 @@ public class QuickSort{
 
 	// System.out.println("Start: "+start+"\nEnd: "+end);
 
-	//average of start and end values (if there are duplicates of the pivot number)
+	//average of start and end values (if there are duplicates of pivotNum)
     	return (start+end)/2;
     }
 
-    //Other partition method: not good for duplicates
-    // public static int partition(int[] L, int left, int right){
+    // Other partition method: not good for duplicates
+
+    // public static int partition1(int[] L, int left, int right){
     // 	//random partition number
     // 	int frontIndex=left, temp=0, pivotInitialIndex=left+rand.nextInt(right-left), pivotNum=L[pivotInitialIndex];
     // 	//store the pivot at end
@@ -89,19 +90,30 @@ public class QuickSort{
     // 	return frontIndex;
     // }
 
-    public static void main(String[] args){
-	// int[] a = {0,1,2,3,4,5,6,7,8,9};
-	// int[] a = {9,8,7,6,5,4,3,2,1,0};
-	// int[] a = {2,2,2,2,2,2,2,1,3,2,2,4};
-	int[] a = {7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
-	// System.out.println("Original array: "+Arrays.toString(a));
-	// partition(a,0,a.length-1);
-	// System.out.println("Pivot index: "+pos);
-	// System.out.println("Partitioned array: "+Arrays.toString(a));
+    // public static void main(String[] args){
+    // 	int[] a = {0,1,2,3,4,5,6,7,8,9};
+    // 	int[] b = {9,8,7,6,5,4,3,2,1,0};
+    // 	int[] c = {2,2,2,2,2,2,2,1,3,2,2,4};
+    // 	int[] d = {7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
 
-	quicksort(a);
-	System.out.println(Arrays.toString(a));
-   }
+    // System.out.println("Original array: "+Arrays.toString(a));
+    // partition(a,0,a.length-1);
+    // System.out.println("Pivot index: "+pos);
+    // System.out.println("Partitioned array: "+Arrays.toString(a));
+
+    // 	quicksort(a);
+    // 	System.out.println(Arrays.toString(a));
+
+    // 	quicksort(b);
+    // 	System.out.println(Arrays.toString(b));
+
+    // 	quicksort(c);
+    // 	System.out.println(Arrays.toString(c));
+
+    // 	quicksort(d);
+    // 	System.out.println(Arrays.toString(d));
+
+    // }
 
 }
 
