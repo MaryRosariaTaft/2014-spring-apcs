@@ -9,6 +9,9 @@ public class MyLinkedList{
 	head=null;
     }
 
+    //To-do list
+    //make a method for adding another MyLinkedList into the current instance at any position, probably recursively
+
     public int length(){
 	int len=0;
 	Node current=head;
@@ -36,33 +39,83 @@ public class MyLinkedList{
     }
 
     public String get(int position){
-	accessNode(position).getData();
+	return accessNode(position).getData();
     }
 
     public void add(String s, int position){
 	Node n=new Node(s);
-	n.setNext(accessNode(position).getNext);
-	accessNode(position)=n;
-	//this isn't complete
+	if(position<0||position>length())
+	    throw new NullPointerException();
+	if(position==0){
+	    n.setNext(head);
+	    head=n;
+	}else if(position==length()){
+	    accessNode(position-1).setNext(n);
+	}else{
+	    n.setNext(accessNode(position));
+	    accessNode(position-1).setNext(n);
+	}
+    }
+
+    public void add(String s){
+	add(s,length());
+    }
+
+    public void add(Node n, int position){
+	if(position<0||position>length())
+	    throw new NullPointerException();
+	if(position==0){
+	    n.setNext(head);
+	    head=n;
+	}else if(position==length()){
+	    accessNode(position-1).setNext(n);
+	}else{
+	    n.setNext(accessNode(position));
+	    accessNode(position-1).setNext(n);
+	}
+    }
+
+    public void add(Node n){
+	add(n,length());
     }
 
     public void remove(int position){
-	//remore node at position
+	if(position<0||position>=length())
+	    throw new NullPointerException();
+	if(position==0){
+	    head=head.getNext();
+	}else if(position==length()-1){
+	    accessNode(position-1).setNext(null);
+	}else{
+	    accessNode(position-1).setNext(accessNode(position).getNext());
+	}
     }
 
     public int find(String s){
-	//base cases?
-	//return index of first occurrence of s
-	//-1 if it isn't in the List
+	int currentPosition=0;
+	Node current=head;
+	while(currentPosition<length()){
+	    if(current.getData().equals(s))
+		return currentPosition;
+	    currentPosition++;
+	    current=current.getNext();
+	}
+	return -1;
     }
 
     public String toString(){
 	String ans = "[";
-	while(){
-
+	int currentPosition=0;
+	Node current=head;
+	while(currentPosition<length()){
+	    ans+=current.getData()+", ";
 	}
 	ans+="]";
 	return ans;
     }
+
+    //English is a cool language
+    //head-tail; front-back; beginning-end; start-finish
+
 
 }
