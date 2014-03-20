@@ -44,8 +44,8 @@ public class MyLinkedList{
 
     public void add(String s, int position){
 	Node n=new Node(s);
-	if(position<0||position>length())
-	    throw new NullPointerException();
+	// if(position<0||position>length())
+	//     throw new NullPointerException();
 	if(position==0){
 	    n.setNext(head);
 	    head=n;
@@ -104,18 +104,20 @@ public class MyLinkedList{
     }
 
     public String toString(){
-	String ans = "[";
+	String ans="[";
 	int currentPosition=0;
 	Node current=head;
 	while(currentPosition<length()){
 	    ans+=current.getData()+", ";
+	    currentPosition++;
+	    current=current.getNext();
 	}
-	ans+="]";
-	return ans;
+	return ans+"]";
     }
 
     //English is a cool language
     //head-tail; front-back; beginning-end; start-finish
+    //big-little; large-small
 
 
 }
