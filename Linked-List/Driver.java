@@ -4,7 +4,7 @@ import java.util.*;
 public class Driver{
 
     public static void main(String[] args){
-	Node n=new Node("test");
+	Node n=new Node("testNode");
 	MyLinkedList L = new MyLinkedList();
 	L.add("test0",0);
 	L.add("test1",1);
@@ -14,6 +14,9 @@ public class Driver{
 	L.remove(1);
 	System.out.println(L);
 	System.out.println("Index of the first occurrence of \"test2\": "+L.find("test2"));
+	L.add(n);
+	System.out.println(L);
+	//L.add("outofboundstest",-1);
     }
 
 }

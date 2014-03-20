@@ -3,15 +3,13 @@ import java.util.*;
 
 public class MyLinkedList{
 
-    private Node head;
+    public Node head;
 
     public MyLinkedList(){
 	head=null;
     }
 
-    //To-do list
-    //make a method for adding another MyLinkedList into the current instance at any position, probably recursively
-
+    //returns length of the linked list
     public int length(){
 	int len=0;
 	Node current=head;
@@ -22,6 +20,7 @@ public class MyLinkedList{
 	return len;
     }
 
+    //returns the Node at desired index
     public Node accessNode(int position){
 	if(position<0||position>length())
 	    throw new NullPointerException();
@@ -34,18 +33,21 @@ public class MyLinkedList{
 	return current;
     }
 
+    //changes the data of Node at desired index
     public void set(int position, String newString){
 	accessNode(position).setData(newString);	
     }
 
+    //returns String data contained at Node at position
     public String get(int position){
 	return accessNode(position).getData();
     }
 
+    //creates new Node and adds it to desired index
     public void add(String s, int position){
 	Node n=new Node(s);
-	// if(position<0||position>length())
-	//     throw new NullPointerException();
+	if(position<0||position>length())
+	    throw new NullPointerException();
 	if(position==0){
 	    n.setNext(head);
 	    head=n;
@@ -57,10 +59,12 @@ public class MyLinkedList{
 	}
     }
 
+    //creates new Node and adds it to end
     public void add(String s){
 	add(s,length());
     }
 
+    //adds Node n at desired index
     public void add(Node n, int position){
 	if(position<0||position>length())
 	    throw new NullPointerException();
@@ -75,10 +79,12 @@ public class MyLinkedList{
 	}
     }
 
+    //adds Node n to end
     public void add(Node n){
 	add(n,length());
     }
 
+    //removes Node at said position
     public void remove(int position){
 	if(position<0||position>=length())
 	    throw new NullPointerException();
@@ -91,6 +97,7 @@ public class MyLinkedList{
 	}
     }
 
+    //returns the index of the first occurrence of String s
     public int find(String s){
 	int currentPosition=0;
 	Node current=head;
@@ -101,6 +108,29 @@ public class MyLinkedList{
 	    current=current.getNext();
 	}
 	return -1;
+    }
+
+    //appends L onto this instance of MyLinkedList
+    public void merge(MyLinkedList L){
+	// int currentPosition=0;
+	// Node current=L.head;
+	// while(currentPosition<L.length()){
+	//     add(current);
+	//     currentPosition++;
+	//     current=current.getNext();
+	// }
+	merge(L,length());
+    }
+
+
+    public void merge(MyLinkedList L, int position){
+	int currentPosition=L.length()-1;
+	Node current=L.head;
+	while(currentPosition>=0){
+	    add(current);
+	    currentPosition--;
+	    current=current.getNext();
+	}
     }
 
     public String toString(){
