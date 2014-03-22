@@ -16,7 +16,7 @@ public class Driver{
 	L.add(new Node("testNode"));
 	System.out.println(L);
 	System.out.println("Length: "+L.length());
-	//	L.add("outofboundstest",-1);
+	L.add("outofboundstest",-1);
 	
 	MyLinkedList L2 = new MyLinkedList();
 	L2.add("mergeTest1");

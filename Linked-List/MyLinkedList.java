@@ -21,7 +21,7 @@ public class MyLinkedList{
 	if(position==-1)
 	    return head;
 	if(position<0||position>length())
-	    throw new ArrayIndexOutOfBoundsException();//LinkedListIndexOutOfBoundsException("Out of bounds: "+position);
+	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	int currentPosition=0;
 	Node current=head.getNext();
 	while(currentPosition<position){
@@ -34,21 +34,21 @@ public class MyLinkedList{
     //changes the data of Node at desired index
     public void set(int position, String newString){
 	if(position<0||position>length())
-	    throw new ArrayIndexOutOfBoundsException();//LinkedListIndexOutOfBoundsException("Out of bounds: "+position);
+	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	accessNode(position).setData(newString);	
     }
 
     //returns String data contained at Node at position
     public String get(int position){
 	if(position<0||position>length())
-	    throw new ArrayIndexOutOfBoundsException();//LinkedListIndexOutOfBoundsException("Out of bounds: "+position);
+	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	return accessNode(position).getData();
     }
 
     //creates new Node and adds it to desired index
     public void add(String s, int position){
 	if(position<0||position>length())
-	    throw new ArrayIndexOutOfBoundsException("Index: "+position);//LinkedListIndexOutOfBoundsException("Out of bounds: "+position);
+	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	Node n=new Node(s), temp=accessNode(position-1);
 	n.setNext(temp.getNext());
 	temp.setNext(n);
@@ -63,7 +63,7 @@ public class MyLinkedList{
     //adds Node n at desired index
     public void add(Node n, int position){
 	if(position<0||position>length())
-	    throw new ArrayIndexOutOfBoundsException();//LinkedListIndexOutOfBoundsException("Out of bounds: "+position);
+	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	Node temp=accessNode(position-1);
 	n.setNext(temp.getNext());
 	temp.setNext(n);
@@ -78,7 +78,7 @@ public class MyLinkedList{
     //removes Node at said position
     public void remove(int position){
 	if(position<0||position>=length())
-	    throw new ArrayIndexOutOfBoundsException();//LinkedListIndexOutOfBoundsException("Out of bounds: "+position);
+	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	Node temp=accessNode(position-1);
 	temp.setNext(temp.getNext().getNext());
 	length--;
