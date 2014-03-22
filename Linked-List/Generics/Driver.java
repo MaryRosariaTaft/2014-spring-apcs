@@ -27,7 +27,7 @@ public class Driver{
 	System.out.println();
 
 	L.add(new Node<String>("testNode"));
-	System.out.println("Added 1 elements.");
+	System.out.println("Added 1 element.");
 	System.out.println(L);
 	System.out.println();
 
@@ -43,8 +43,12 @@ public class Driver{
 	System.out.println("Removed the last element.");
 	System.out.println(L);
 	System.out.println();
+	System.out.println();
 
 	// L.add("outofboundstest",-1);
+	// L.add("outofboundstest",20);
+	// L.remove(-1);
+	// L.remove(20);
 	
 	//
 
@@ -69,8 +73,11 @@ public class Driver{
 	System.out.println("Index of the first occurrence of 17: "+L2.find(17));
 	System.out.println();
 
+	System.out.println("Index of the first occurrence of 23: "+L2.find(23));
+	System.out.println();
+
 	L2.add(new Node<Integer>(42));
-	System.out.println("Added 1 elements.");
+	System.out.println("Added 1 element.");
 	System.out.println(L2);
 	System.out.println();
 
@@ -94,3 +101,62 @@ public class Driver{
     }
 
 }
+
+
+// another Driver written by a classmate
+// public class Driver{
+    
+//     public static void wait(int a){
+//         try {
+//             Thread.sleep(a);
+//         } catch(InterruptedException ex) {
+//             Thread.currentThread().interrupt();
+//         }
+//     }
+    
+    
+//     public static void main(String[]args){
+// 	Node<String> s = new Node<String>("Hello!");
+// 	System.out.println(s);
+    
+// 	MyLinkedList<Integer> a = new MyLinkedList<Integer>();
+// 	int[] test = {315,0,10,1,6848,64,41,31,13,14,415,14,143,31,4314,341};
+    
+// 	System.out.println("\nAdding Integers to List...\n\n");
+// 	for (int i = 0; i < 7; i ++){
+// 	    a.add(new Integer(test[test.length-i-1]),i);
+// 	}
+    
+    
+    
+// 	System.out.println("Removing Integers:");
+// 	System.out.println(a);
+// 	a.remove(1);
+// 	System.out.println(a);
+// 	a.remove(a.length()-1);
+// 	System.out.println(a);
+// 	a.remove(0);
+// 	System.out.println(a);
+// 	wait(2000);
+    
+// 	System.out.println("\n\nSetting:");        
+// 	for(int i = 0; i < test.length && i < a.length(); i++){
+// 	    System.out.println("Setting Index " + i + " to Integer " + test[i]);
+// 	    a.set(i,new Integer(test[i]));
+// 	    System.out.println(a);
+// 	}    
+// 	wait(2000);
+    
+    
+// 	System.out.println("\n\nGetting:");    
+// 	for(int i = 0; i < a.length();i++){
+// 	    System.out.println(i + ": " + a.get(i));
+// 	}
+    
+// 	wait(2000);
+// 	System.out.println("\n\nFinding");
+// 	for(int i = 0; i < a.length(); i++){
+// 	    System.out.println(a.find(a.get(i)));
+// 	}
+//     }
+// }
