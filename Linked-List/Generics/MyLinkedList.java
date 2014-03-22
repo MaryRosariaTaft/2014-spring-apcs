@@ -123,9 +123,4 @@ public class MyLinkedList<T>{
 	return ans+current.getData().toString()+"]";
     }
 
-    //English is a cool language
-    //head-tail; front-back; beginning-end; start-finish
-    //big-little; large-small
-
-
 }
