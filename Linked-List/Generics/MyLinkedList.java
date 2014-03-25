@@ -1,18 +1,26 @@
 import java.io.*;
 import java.util.*;
 
-public class MyLinkedList<T>{
+public class MyLinkedList<T> implements Iterable<T>{
 
-    public Node<T> head;
+    public Node<T> head, tail;
     private int length;
 
     public MyLinkedList(){
 	head=new Node<T>(null);
+	tail=head;
 	length=0;
+    }
+
+    public Iterator<T> iterator(){
+	return new MyLinkedListIterator<T>(head);
     }
 
     //returns length of the linked list
     public int length(){
+	return length;
+    }
+    public int size(){
 	return length;
     }
 
@@ -20,6 +28,8 @@ public class MyLinkedList<T>{
     public Node<T> accessNode(int position){
 	if(position==-1)
 	    return head;
+	if(position==length()-1)
+	    return tail;
 	if(position<0||position>length())
 	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	int currentPosition=0;
@@ -53,6 +63,8 @@ public class MyLinkedList<T>{
 	n.setNext(temp.getNext());
 	temp.setNext(n);
 	length++;
+	if(position==length()-1)
+	    tail=n;
     }
 
     //creates new Node and adds it to end
@@ -68,6 +80,8 @@ public class MyLinkedList<T>{
 	n.setNext(temp.getNext());
 	temp.setNext(n);
 	length++;
+	if(position==length()-1)
+	    tail=n;
     }
 
     //adds Node n to end
@@ -82,6 +96,8 @@ public class MyLinkedList<T>{
 	Node<T> temp=accessNode(position-1);
 	temp.setNext(temp.getNext().getNext());
 	length--;
+	if(position==length()-1)
+	    tail=temp;
     }
 
     //returns the index of the first occurrence of String s

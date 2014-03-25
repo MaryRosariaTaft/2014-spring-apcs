@@ -93,6 +93,19 @@ public class Driver{
 	System.out.println("Removed the last element.");
 	System.out.println(L2);
 	System.out.println();
+	System.out.println();
+
+	System.out.println("List 3: Characters");
+
+	MyLinkedList<Character> L3 = new MyLinkedList<Character>();
+	Random r=new Random();
+
+	for(int i=0;i<23;i++)
+	    L3.add((Character)(char)(97+r.nextInt(26)));
+
+	System.out.println("Testing iteration by using for-each loop on list.");
+	for(Character c:L3)
+	    System.out.println(c);
 
 	//
 
