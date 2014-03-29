@@ -1,18 +1,18 @@
 import java.io.*;
 import java.util.*;
 
-public class MergeSortObject{
+public class MergeSort{
 
     public static <T extends Comparable<T>> void msort(ArrayList<T> L){
-             if(L.size()>1){
-	   ArrayList<T> a=new ArrayList<T>(), b=new ArrayList<T>();
-	   copy(L,0,L.size()/2,a);
-	   copy(L,a.size(),L.size(),b);
-	   msort(a);
-	   msort(b);
-	   copy(merge(a,b),0,L.size(),L);
-	     }
-  }
+	if(L.size()>1){
+	    ArrayList<T> a=new ArrayList<T>(), b=new ArrayList<T>();
+	    copy(L,0,L.size()/2,a);
+	    copy(L,a.size(),L.size(),b);
+	    msort(a);
+	    msort(b);
+	    copy(merge(a,b),0,L.size(),L);
+	}
+    }
 
     public static <T extends Comparable<T>> void copy(ArrayList<T> originalList, int start, int end, ArrayList<T> newList){
 	if(newList.size()>0)
@@ -21,7 +21,7 @@ public class MergeSortObject{
 	    newList.add(originalList.get(i));	    
     }
 
-        public static <T extends Comparable<T>> ArrayList<T> merge(ArrayList<T> a, ArrayList<T> b){
+    public static <T extends Comparable<T>> ArrayList<T> merge(ArrayList<T> a, ArrayList<T> b){
     	ArrayList<T> ans = new ArrayList<T>();
     	while(a.size()>0||b.size()>0){
     	    if(a.size()==0){
