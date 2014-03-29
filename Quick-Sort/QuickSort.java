@@ -90,30 +90,33 @@ public class QuickSort{
     // 	return frontIndex;
     // }
 
-    // public static void main(String[] args){
-    // 	int[] a = {0,1,2,3,4,5,6,7,8,9};
-    // 	int[] b = {9,8,7,6,5,4,3,2,1,0};
-    // 	int[] c = {2,2,2,2,2,2,2,1,3,2,2,4};
-    // 	int[] d = {7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
+    public static void main(String[] args){
+    	int[] a = {0,1,2,3,4,5,6,7,8,9};
+    	int[] b = {9,8,7,6,5,4,3,2,1,0};
+    	int[] c = {2,2,2,2,2,2,2,1,3,2,2,4};
+    	int[] d = {7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
 
-    // System.out.println("Original array: "+Arrays.toString(a));
-    // partition(a,0,a.length-1);
-    // System.out.println("Pivot index: "+pos);
-    // System.out.println("Partitioned array: "+Arrays.toString(a));
+    	System.out.println("Original: "+Arrays.toString(a));
+    	quicksort(a);
+    	System.out.println("Sorted: "+Arrays.toString(a));
+	System.out.println();
 
-    // 	quicksort(a);
-    // 	System.out.println(Arrays.toString(a));
+    	System.out.println("Original: "+Arrays.toString(b));
+    	quicksort(b);
+    	System.out.println("Sorted: "+Arrays.toString(b));
+	System.out.println();
 
-    // 	quicksort(b);
-    // 	System.out.println(Arrays.toString(b));
+    	System.out.println("Original: "+Arrays.toString(c));
+    	quicksort(c);
+    	System.out.println("Sorted: "+Arrays.toString(c));
+	System.out.println();
 
-    // 	quicksort(c);
-    // 	System.out.println(Arrays.toString(c));
+    	System.out.println("Original: "+Arrays.toString(d));
+    	quicksort(d);
+    	System.out.println("Sorted: "+Arrays.toString(d));
+	System.out.println();
 
-    // 	quicksort(d);
-    // 	System.out.println(Arrays.toString(d));
-
-    // }
+    }
 
 }
 
