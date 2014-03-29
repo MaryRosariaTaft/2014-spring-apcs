@@ -1,29 +1,39 @@
 import java.io.*;
 import java.util.*;
 
-public class MyLinkedList{
+public class MyLinkedList<T> implements Iterable<T>{
 
-    public Node head;
+    public Node<T> head, tail;
     private int length;
 
     public MyLinkedList(){
-	head=new Node("BUFFER");
+	head=new Node<T>(null);
+	tail=head;
 	length=0;
+    }
+
+    public Iterator<T> iterator(){
+	return new MyLinkedListIterator<T>(head);
     }
 
     //returns length of the linked list
     public int length(){
 	return length;
     }
+    public int size(){
+	return length;
+    }
 
     //returns the Node at desired index
-    public Node accessNode(int position){
+    public Node<T> accessNode(int position){
 	if(position==-1)
 	    return head;
+	if(position==length()-1)
+	    return tail;
 	if(position<0||position>length())
 	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	int currentPosition=0;
-	Node current=head.getNext();
+	Node<T> current=head.getNext();
 	while(currentPosition<position){
 	    currentPosition++;
 	    current=current.getNext();
@@ -32,46 +42,50 @@ public class MyLinkedList{
     }
 
     //changes the data of Node at desired index
-    public void set(int position, String newString){
+    public void set(int position, T newData){
 	if(position<0||position>length())
 	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
-	accessNode(position).setData(newString);	
+	accessNode(position).setData(newData);	
     }
 
     //returns String data contained at Node at position
-    public String get(int position){
+    public T get(int position){
 	if(position<0||position>length())
 	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
 	return accessNode(position).getData();
     }
 
     //creates new Node and adds it to desired index
-    public void add(String s, int position){
+    public void add(T s, int position){
 	if(position<0||position>length())
 	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
-	Node n=new Node(s), temp=accessNode(position-1);
+	Node<T> n=new Node<T>(s), temp=accessNode(position-1);
 	n.setNext(temp.getNext());
 	temp.setNext(n);
 	length++;
+	if(position==length()-1)
+	    tail=n;
     }
 
     //creates new Node and adds it to end
-    public void add(String s){
+    public void add(T s){
 	add(s,length());
     }
 
     //adds Node n at desired index
-    public void add(Node n, int position){
+    public void add(Node<T> n, int position){
 	if(position<0||position>length())
 	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
-	Node temp=accessNode(position-1);
+	Node<T> temp=accessNode(position-1);
 	n.setNext(temp.getNext());
 	temp.setNext(n);
 	length++;
+	if(position==length()-1)
+	    tail=n;
     }
 
     //adds Node n to end
-    public void add(Node n){
+    public void add(Node<T> n){
 	add(n,length());
     }
 
@@ -79,15 +93,17 @@ public class MyLinkedList{
     public void remove(int position){
 	if(position<0||position>=length())
 	    throw new IndexOutOfBoundsException("Out of bounds: "+position);
-	Node temp=accessNode(position-1);
+	Node<T> temp=accessNode(position-1);
 	temp.setNext(temp.getNext().getNext());
 	length--;
+	if(position==length()-1)
+	    tail=temp;
     }
 
     //returns the index of the first occurrence of String s
-    public int find(String s){
+    public int find(T s){
 	int currentPosition=0;
-	Node current=head.getNext();
+	Node<T> current=head.getNext();
 	while(currentPosition<length()){
 	    if(current.getData().equals(s))
 		return currentPosition;
@@ -114,18 +130,13 @@ public class MyLinkedList{
     public String toString(){
 	String ans="[";
 	int currentPosition=0;
-	Node current=head.getNext();
+	Node<T> current=head.getNext();
 	while(currentPosition<length()-1){
-	    ans+=current.getData()+", ";
+	    ans+=current.getData().toString()+", ";
 	    currentPosition++;
 	    current=current.getNext();
 	}
-	return ans+current.getData()+"]";
+	return ans+current.getData().toString()+"]";
     }
-
-    //English is a cool language
-    //head-tail; front-back; beginning-end; start-finish
-    //big-little; large-small
-
 
 }

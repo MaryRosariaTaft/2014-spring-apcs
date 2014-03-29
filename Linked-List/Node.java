@@ -1,21 +1,21 @@
 import java.io.*;
 import java.util.*;
 
-public class Node{
+public class Node<T>{
 
-    private String data;
-    private Node next;
+    private T data;
+    private Node<T> next;
 
-    public Node(String data){this.data=data;next=null;}
+    public Node(T data){this.data=data;next=null;}
 
-    public void setData(String data){this.data=data;}
+    public void setData(T data){this.data=data;}
 
-    public void setNext(Node next){this.next=next;}
+    public void setNext(Node<T> next){this.next=next;}
 
-    public String getData(){return data;}
+    public T getData(){return data;}
 
-    public Node getNext(){return next;}
+    public Node<T> getNext(){return next;}
 
-    public String toString(){return data;}
+    public String toString(){return data.toString();}
 
 }
