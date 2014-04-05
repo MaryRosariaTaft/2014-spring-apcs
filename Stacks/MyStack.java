@@ -46,7 +46,7 @@ public class MyStack<E>{
 	int pos=1;
 	Node<E> current=top;
 	while(current!=null){
-	    if(current.getData()==o)
+	    if(current.getData().equals(o))
 		return pos;
 	    pos++;
 	    current=current.getNext();
