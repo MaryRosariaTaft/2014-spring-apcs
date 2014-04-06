@@ -6,32 +6,34 @@ public class MyStackArrays<E>{
     private E[] stack;
 
     public MyStackArrays(){
-        stack=new E[0];
+        stack=(E[])(new Object[0]);
     }
 
     public boolean empty(){
-	return stack.length>0;
+	return stack.length<=0;
     }
 
     public E peek(){
 	if(empty())
 	    throw new EmptyStackException();
-	return stack[0];
+	return stack[stack.length-1];
     }
 
     public E pop(){
-	E ans=stack[stack.length-1];
-	E[] temp=new E[stack.length-1];
+	E ans=peek();
+	Object[] temp=(E[])(new Object[stack.length-1]);
 	for(int i=0;i<temp.length;i++)
 	    temp[i]=stack[i];
+	stack=(E[])temp;
 	return ans;
     }
 
     public void push(E d){
-	E[] temp=new E[stack.length+1];
+	Object[] temp=(E[])(new Object[stack.length+1]);
 	for(int i=0;i<stack.length;i++)
 	    temp[i]=stack[i];
         temp[temp.length-1]=d;
+	stack=(E[])temp;
     }
 
     public int search(Object o){
@@ -43,10 +45,7 @@ public class MyStackArrays<E>{
     }
 
     public String toString(){
-	String s="";
-	for(int i=0;i<stack.length;i++)
-	    s+=stack[i].toString()+" ";
-	return s;
+	return Arrays.toString(stack);
     }
 
 }

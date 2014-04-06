@@ -23,6 +23,25 @@ public class Driver{
 	System.out.println("First occurrence of 3: "+ms.search(3));
 	System.out.println("First occurrence of 66: "+ms.search(66));
 
+	MyStackArrays<Integer> msa = new MyStackArrays<Integer>();
+	msa.push(8);
+	System.out.println(msa);
+	msa.push(8);
+	msa.push(9);
+	msa.push(4);
+	msa.push(10);
+	msa.push(3);
+	msa.push(3);
+	msa.push(3);
+	msa.push(3);
+	msa.push(123);
+	System.out.println(msa);
+	System.out.println(msa.pop());
+	System.out.println(msa);
+	System.out.println("First occurrence of 3: "+msa.search(3));
+	System.out.println("First occurrence of 66: "+msa.search(66));
+
+
     }
 
 }
