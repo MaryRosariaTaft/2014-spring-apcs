@@ -13,8 +13,8 @@ public class Calculator{
 		stack.push(sc.nextDouble());
 	    }else{
 		String s = sc.next();
-		Double d1 = stack.pop(),
-		    d2 = stack.pop();
+		Double d2 = stack.pop(),
+		    d1 = stack.pop();
 		if(s.equals("+")){
 		    stack.push(d1+d2);
 		}else if(s.equals("-")){
