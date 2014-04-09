@@ -4,9 +4,31 @@ import java.util.*;
 public class MyStackArrays<E>{
 
     private E[] stack;
+    private int size;
 
     public MyStackArrays(){
-        stack=(E[])(new Object[0]);
+        stack=(E[])(new Object[100]);
+	size=0;
+    }
+
+    public int size(){
+	return size;
+    }
+
+    public void grow(){
+	E[] temp=(E[])(new Object[stack.length*2]);
+	for(int i=0;i<size;i++){
+	    temp[i]=stack[i];
+	}
+	stack=temp;
+    }
+
+    public void shrink(){
+	E[] temp=(E[])(new Object[stack.length/2]);
+	for(int i=0;i<size;i++){
+	    temp[i]=stack[i];
+	}
+	stack=temp;
     }
 
     public boolean empty(){
@@ -16,24 +38,23 @@ public class MyStackArrays<E>{
     public E peek(){
 	if(empty())
 	    throw new EmptyStackException();
-	return stack[stack.length-1];
+	return stack[size-1];
     }
 
     public E pop(){
 	E ans=peek();
-	Object[] temp=(E[])(new Object[stack.length-1]);
-	for(int i=0;i<temp.length;i++)
-	    temp[i]=stack[i];
-	stack=(E[])temp;
+	size--;
+	if(size>20&&size<=stack.length/4)
+	    shrink();
 	return ans;
     }
 
     public void push(E d){
-	Object[] temp=(E[])(new Object[stack.length+1]);
-	for(int i=0;i<stack.length;i++)
-	    temp[i]=stack[i];
-        temp[temp.length-1]=d;
-	stack=(E[])temp;
+	if(stack.length==size)
+	    grow();
+	stack[size]=d;
+	size++;
+	
     }
 
     public int search(Object o){
