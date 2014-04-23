@@ -3,9 +3,13 @@ import java.util.*;
 
 //runtime: n+(n/2)+(n/4)+(n/8)+... = n+n = 2n = O(n)
 
-public class QuickSort{
+public class Sorts{
 
     private static Random rand = new Random();
+
+    public static String name(){
+	return "Taft, Mary";
+    }
 
     public static void quicksort(int[]L){
 	quicksort(L,0,L.length-1);
@@ -89,34 +93,6 @@ public class QuickSort{
     // 	L[right]=temp;
     // 	return frontIndex;
     // }
-
-    public static void main(String[] args){
-    	int[] a = {0,1,2,3,4,5,6,7,8,9};
-    	int[] b = {9,8,7,6,5,4,3,2,1,0};
-    	int[] c = {2,2,2,2,2,2,2,1,3,2,2,4};
-    	int[] d = {7,2,7,9,4,7,7,3,11,44,1,45,7,666,33,9,4,6,2,8,8888,8,4,2};
-
-    	System.out.println("Original: "+Arrays.toString(a));
-    	quicksort(a);
-    	System.out.println("Sorted: "+Arrays.toString(a));
-	System.out.println();
-
-    	System.out.println("Original: "+Arrays.toString(b));
-    	quicksort(b);
-    	System.out.println("Sorted: "+Arrays.toString(b));
-	System.out.println();
-
-    	System.out.println("Original: "+Arrays.toString(c));
-    	quicksort(c);
-    	System.out.println("Sorted: "+Arrays.toString(c));
-	System.out.println();
-
-    	System.out.println("Original: "+Arrays.toString(d));
-    	quicksort(d);
-    	System.out.println("Sorted: "+Arrays.toString(d));
-	System.out.println();
-
-    }
 
 }
 
