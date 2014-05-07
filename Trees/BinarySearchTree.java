@@ -39,6 +39,10 @@ public class BinarySearchTree{
 	    count--;
 	}
 
+	public int getCount(){
+	    return count;
+	}
+
 	public int getData(){
 	    return data;
 	}
@@ -101,11 +105,47 @@ public class BinarySearchTree{
 	}
     }
 
+    public Node highest(){
+	if(root==null)
+	    return null;
+	return highestInBranch(root);
+    }
+
+    public Node highestInBranch(Node n){
+	if(n.getRight()==null)
+	    return n;
+	return highestInBranch(n.getRight());
+    }
+
+    public Node lowest(){
+	if(root==null)
+	    return null;
+	return lowestInBranch(root);
+    }
+
+    public Node lowestInBranch(Node n){
+	if(n.getLeft()==null)
+	    return n;
+	return lowestInBranch(n.getLeft());
+    }
+
     public boolean remove(int target){
         Node n=find(target);
 	if(n==null)
 	    return false;
-	//INCOMPLETE
+	n.decrement();
+	if(n.getCount()==0&&!(n.getLeft()==null&&n.getRight()==null)){
+	    if(n.getLeft()==null){
+		//make right child new branch head
+		
+	    }else if(n.getRight()==null){
+		//make left child new branch head
+
+	    }else{
+		//make highest of left child (or lowest of right child) (the value closest to the one removed)the  new branch head and restructure accordingly
+
+	    }
+	}
 	return true;
     }
 
