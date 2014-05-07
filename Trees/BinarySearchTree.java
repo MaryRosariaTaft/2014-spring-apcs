@@ -59,13 +59,6 @@ public class BinarySearchTree{
 
     private Node root;
 
-    public BinarySearchTree(){
-	root=null;
-	root.setData(0);
-	root.setRight(null);
-	root.setLeft(null);
-    }
-
     /////
     public int size(){ //number of Nodes in tree
 	return 0;        
@@ -88,7 +81,10 @@ public class BinarySearchTree{
     }
 
     public void insert(int value){
-	insert(root,value);
+	if(root==null)
+	    root=new Node(value);
+	else
+	    insert(root,value);
     }
 
     public void insert(Node current, int value){
@@ -97,9 +93,9 @@ public class BinarySearchTree{
 	}else if(value>current.getData()&&current.getRight()==null){
 	    current.setRight(new Node(value));
 	}else if(value<current.getData()){
-	    current=current.getLeft();
+	    insert(current.getLeft(),value);
 	}else if(value>current.getData()){
-	    current=current.getRight();
+	    insert(current.getRight(),value);
 	}else if(value==current.getData()){
 	    current.increment();
 	}
@@ -126,13 +122,14 @@ public class BinarySearchTree{
     }
 
     public String display(Node current){
-	if(current==null)
-	    return "null";
-	return current.getLeft()+"<--"+
-	    current+"-->"+
-	    current.getRight()+"/n"+
-	    display(current.getLeft())+
-	    display(current.getRight());
+	if(current.getLeft()==null&&current.getRight()==null)
+	    return " <--"+current+"--> ";
+	if(current.getLeft()==null)
+	    return " <--"+current+"-->"+current.getRight()+"\n"+display(current.getRight());
+	if(current.getRight()==null)
+	    return current.getLeft()+"<--"+current+"--> \n"+display(current.getLeft());
+	return current.getLeft()+"<--"+current+"-->"+current.getRight()+
+	    "\n"+display(current.getLeft())+"\n"+display(current.getRight());
     }
 
     public String toString(){
