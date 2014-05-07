@@ -12,6 +12,13 @@ public class BinarySearchTree{
 	    right=null;
 	}
 
+	public Node(int d){
+	    data=d;
+	    count=1;
+	    left=null;
+	    right=null;
+	}
+
 	public void setData(int data){
 	    this.data=data;
 	}
@@ -59,65 +66,77 @@ public class BinarySearchTree{
 	root.setLeft(null);
     }
 
+    /////
+    public int size(){ //number of Nodes in tree
+	return 0;        
+    }
+
     public Node find(int target){
-	current=root;
-	while(current!=null){
-	    if(target==current.getData())
-		return current;
-	    if (target<current.getData())
-		current=current.getLeft();
-	    else if (target>current.getData())
-		current=current.getRight();
+	return find(root,target);
+    }
+
+    public Node find(Node current, int target){
+	if(current==null || target==current.getData()){
+	    return current;
+	}else{
+	    if(target<current.getData()){
+		return find(current.getLeft(),target);
+	    }else{
+		return find(current.getRight(),target);
+	    }
 	}
-	return null;
     }
 
     public void insert(int value){
-	Node alreadyThere = find(value);
-	if (alreadyThere!=null)
-	    alreadyThere++;
-	return;
-
-	current=root;
-	while(current!=null){
-	    //there isn't one --> move down through children
-	    if (value<current.getData())
-		current=current.getLeft();
-	    else if (value>current.getData())
-		current=current.setRight(newNode);
-	}
-	if(value<current.getData())
-	    current.setLeft(newNode);
-	else
-	    current.setRight(newNode);
+	insert(root,value);
     }
 
+    public void insert(Node current, int value){
+	if(value<current.getData()&&current.getLeft()==null){
+	    current.setLeft(new Node(value));
+	}else if(value>current.getData()&&current.getRight()==null){
+	    current.setRight(new Node(value));
+	}else if(value<current.getData()){
+	    current=current.getLeft();
+	}else if(value>current.getData()){
+	    current=current.getRight();
+	}else if(value==current.getData()){
+	    current.increment();
+	}
+    }
 
     public boolean remove(int target){
-	current=find(target);
-	//base case: removing a leaf
-	//take into accoutn removing branches, roots, etc.
-	//replace
+        Node n=find(target);
+	if(n==null)
+	    return false;
+	//INCOMPLETE
+	return true;
     }
 
-    //fred.insert 2,5,9,-1,-3,1,10
-	/*
-	  toString
-	  recursion
-	  if anything == null print ' ' (a space)
-
-	  
-	  LEFT SUBTREE BEFORE RIGHT SUBTREE
-	  B<A>C
-	  B>E
-	  E<C>G
-	  H<F
-
-	  tree:
-      A
-   B     C
-    E   F G
-       H
-	*/
-
+    public String list(){
+	return list(root);
     }
+
+    public String list(Node current){ //returns an ordered list of the elements in this BinarySearchTree
+	return list(current.getLeft())+current+list(current.getRight());
+    }
+
+    public String display(){
+	return display(root);
+    }
+
+    public String display(Node current){
+	if(current==null)
+	    return "null";
+	return current.getLeft()+"<--"+
+	    current+"-->"+
+	    current.getRight()+"/n"+
+	    display(current.getLeft())+
+	    display(current.getRight());
+    }
+
+    public String toString(){
+	return display();
+    }
+
+}
