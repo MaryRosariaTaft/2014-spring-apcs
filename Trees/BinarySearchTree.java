@@ -71,7 +71,7 @@ public class BinarySearchTree{
     public int size(){
 	if(root==null)
 	    return 0;
-	return 1+size(root);
+	return size(root);
     }
 
     public int size(Node n){
@@ -174,6 +174,7 @@ public class BinarySearchTree{
     	    //if the Node is a leaf
     	    if(n.getRight()==null&&n.getLeft()==null){
     		Node parent=findParent(n);
+		System.out.println("In remove. n="+n+" and parent="+parent);
     		if(n.getData()<parent.getData())
     		    parent.setLeft(null);
     		else if(n.getData()>parent.getData())
@@ -186,6 +187,7 @@ public class BinarySearchTree{
     		//save the data and count of the Node whose values will replace the removed one
     	        int d=hi.getData();
     		int c=hi.getCount();
+		System.out.println("In remove().  n="+n+" and hi="+hi);
     		//remove the Node whose values were just saved
     		remove(hi.getData());
 		//finally, remove the values of the Node 'n' and replace them with the saved values
@@ -195,8 +197,11 @@ public class BinarySearchTree{
     	}
     	return true;
     }
+    //ONLY CASE THAT DOESN'T WORK: REMOVE THE ROOT AND THE REPLACEMENT IS A CHILD WHICH HAS NO CHILDREN
 
     public Node findParent(Node n){
+	if(n==root)
+	    return null;
 	return findParent(root,n);
     }
 
