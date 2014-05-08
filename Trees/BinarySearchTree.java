@@ -63,7 +63,7 @@ public class BinarySearchTree{
 
     private Node root;
 
-    /////
+    //INCOMPLETE
     public int size(){ //number of Nodes in tree
 	return 0;        
     }
@@ -137,16 +137,28 @@ public class BinarySearchTree{
 	if(n.getCount()==0&&!(n.getLeft()==null&&n.getRight()==null)){
 	    if(n.getLeft()==null){
 		//make right child new branch head
-		
+		rearrange(n,"right");
 	    }else if(n.getRight()==null){
 		//make left child new branch head
-
+		rearrange(n,"left");
 	    }else{
 		//make highest of left child (or lowest of right child) (the value closest to the one removed)the  new branch head and restructure accordingly
 
 	    }
 	}
 	return true;
+    }
+
+    private void rearrange(Node n, String side){
+	if(n.getRight()==null&&n.getLeft()==null)
+	    n=null; //THIS DOESN'T WORK
+	if(side.equals("right")){
+	    n.setData(n.getRight().getData());
+	    rearrange(n.getRight(),"right");
+	}else{
+	    n.setData(n.getLeft().getData());
+	    rearrange(n.getLeft(),"left");
+	}
     }
 
     public String list(){
