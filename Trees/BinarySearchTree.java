@@ -1,6 +1,6 @@
 public class BinarySearchTree{
 
-    private class Node{
+    protected class Node{
 
 	private int data, count;
 	private Node left, right;
@@ -17,6 +17,10 @@ public class BinarySearchTree{
 	    count=1;
 	    left=null;
 	    right=null;
+	}
+
+	public void setCount(int count){
+	    this.count=count;
 	}
 
 	public void setData(int data){
@@ -129,35 +133,59 @@ public class BinarySearchTree{
 	return lowestInBranch(n.getLeft());
     }
 
-    public boolean remove(int target){
-        Node n=find(target);
-	if(n==null)
-	    return false;
-	n.decrement();
-	if(n.getCount()==0&&!(n.getLeft()==null&&n.getRight()==null)){
-	    if(n.getLeft()==null){
-		//make right child new branch head
-		rearrange(n,"right");
-	    }else if(n.getRight()==null){
-		//make left child new branch head
-		rearrange(n,"left");
-	    }else{
-		//make highest of left child (or lowest of right child) (the value closest to the one removed)the  new branch head and restructure accordingly
+    // n is the node to be removed
+    // if (n.getRight()==null && n.getLeft()==null); i.e., if n is a leaf
+    // set n's parent's right OR left (depending) to null
+    // else
+    // replace (set) removed value with highest value in branch (data AND count)
+    // run remove on the node from which that highest value was taken
+    // (this way, 'root' always points to the correct node; properties of nodes are changed, not the nodes themselves)
 
-	    }
-	}
-	return true;
+    public boolean remove(int target){
+    	Node n=find(target);
+    	if(n==null)
+    	    return false;
+    	n.decrement();
+    	//if the Node is now empty and its value must be removed
+    	if(n.getCount()==0){
+    	    //if the Node is a leaf
+    	    if(n.getRight()==null&&n.getLeft()==null){
+    		Node parent=findParent(n);
+    		if(n.getData()<parent.getData())
+    		    parent.setLeft(null);
+    		else if(n.getData()>parent.getData())
+    		    parent.setRight(null);
+    	    }else{ //if the Node has a child or children
+    		//'hi' is the value which is going to replace the value being removed
+    		Node hi=highestInBranch(n);
+    		if(n==hi)
+    		    hi=highestInBranch(n.getLeft());
+    		//save the data and count of the Node whose values will replace the removed one
+    	        int d=hi.getData();
+    		int c=hi.getCount();
+    		//remove the Node whose values were just saved
+    		remove(hi.getData());
+		//finally, remove the values of the Node 'n' and replace them with the saved values
+		n.setData(d);
+		n.setCount(c);
+    	    }
+    	}
+    	return true;
     }
 
-    private void rearrange(Node n, String side){
-	if(n.getRight()==null&&n.getLeft()==null)
-	    n=null; //THIS DOESN'T WORK
-	if(side.equals("right")){
-	    n.setData(n.getRight().getData());
-	    rearrange(n.getRight(),"right");
+    public Node findParent(Node n){
+	return findParent(root,n);
+    }
+
+    public Node findParent(Node current, Node n){
+	if(n.getData()<current.getData()){
+	    if(current.getLeft()==n)
+		return n;
+	    return findParent(current.getLeft());
 	}else{
-	    n.setData(n.getLeft().getData());
-	    rearrange(n.getLeft(),"left");
+	    if(current.getRight()==n)
+		return n;
+	    return findParent(current.getRight());
 	}
     }
 
