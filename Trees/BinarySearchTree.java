@@ -67,9 +67,40 @@ public class BinarySearchTree{
 
     private Node root;
 
-    //INCOMPLETE
-    public int size(){ //number of Nodes in tree
-	return 0;        
+    //number of Nodes in tree, NOT the number of elements (i.e. if a Node has a 'count' greater than 1)
+    public int size(){
+	if(root==null)
+	    return 0;
+	return 1+size(root);
+    }
+
+    public int size(Node n){
+	Node l=n.getLeft(), r=n.getRight();
+	if(l==null&&r==null)
+	    return 1;
+	if(l==null)
+	    return 1+size(r);
+	if(r==null)
+	    return 1+size(l);
+	return 1+size(r)+size(l);
+    }
+
+    //this one returns the number of elements
+    public int numElements(){
+	if(root==null)
+	    return 0;
+	return root.getCount()+numElements(root);
+    }
+
+    public int numElements(Node n){
+	Node l=n.getLeft(), r=n.getRight();
+	if(l==null&&r==null)
+	    return n.getCount();
+	if(l==null)
+	    return n.getCount()+numElements(r);
+	if(r==null)
+	    return n.getCount()+numElements(l);
+	return n.getCount()+numElements(r)+numElements(l);
     }
 
     public Node find(int target){
@@ -132,14 +163,6 @@ public class BinarySearchTree{
 	    return n;
 	return lowestInBranch(n.getLeft());
     }
-
-    // n is the node to be removed
-    // if (n.getRight()==null && n.getLeft()==null); i.e., if n is a leaf
-    // set n's parent's right OR left (depending) to null
-    // else
-    // replace (set) removed value with highest value in branch (data AND count)
-    // run remove on the node from which that highest value was taken
-    // (this way, 'root' always points to the correct node; properties of nodes are changed, not the nodes themselves)
 
     public boolean remove(int target){
     	Node n=find(target);
