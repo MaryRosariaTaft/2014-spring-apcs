@@ -86,6 +86,7 @@ public class BinarySearchTree{
     }
 
     //this one returns the number of elements
+    //INCOMPLETE//INCORRECT//DOESN'T WORK YET
     public int numElements(){
 	if(root==null)
 	    return 0;
@@ -171,11 +172,13 @@ public class BinarySearchTree{
     	n.decrement();
     	//if the Node is now empty and its value must be removed
     	if(n.getCount()==0){
+	    //if the Node is the root
+	    if(n.getRight()==null&&n.getLeft()==null&&n==root){
+		root=null;
     	    //if the Node is a leaf
-    	    if(n.getRight()==null&&n.getLeft()==null){
+    	    }else if(n.getRight()==null&&n.getLeft()==null){
     		Node parent=findParent(n);
-		System.out.println("In remove. n="+n+" and parent="+parent);
-    		if(n.getData()<parent.getData())
+		if(n.getData()<parent.getData())
     		    parent.setLeft(null);
     		else if(n.getData()>parent.getData())
     		    parent.setRight(null);
@@ -187,8 +190,7 @@ public class BinarySearchTree{
     		//save the data and count of the Node whose values will replace the removed one
     	        int d=hi.getData();
     		int c=hi.getCount();
-		System.out.println("In remove().  n="+n+" and hi="+hi);
-    		//remove the Node whose values were just saved
+		//remove the Node whose values were just saved
     		remove(hi.getData());
 		//finally, remove the values of the Node 'n' and replace them with the saved values
 		n.setData(d);
@@ -207,13 +209,14 @@ public class BinarySearchTree{
 
     public Node findParent(Node current, Node n){
 	if(n.getData()<current.getData()){
-	    if(current.getLeft()==n)
-		return n;
-	    return findParent(current.getLeft());
+	    if(current.getLeft()==n){
+		return current;
+	    }
+	    return findParent(current.getLeft(),n);
 	}else{
 	    if(current.getRight()==n)
-		return n;
-	    return findParent(current.getRight());
+		return current;
+	    return findParent(current.getRight(),n);
 	}
     }
 
@@ -231,12 +234,12 @@ public class BinarySearchTree{
 
     public String display(Node current){
 	if(current.getLeft()==null&&current.getRight()==null)
-	    return " <--"+current+"--> ";
+	    return " <"+current+"> ";
 	if(current.getLeft()==null)
-	    return " <--"+current+"-->"+current.getRight()+"\n"+display(current.getRight());
+	    return " <"+current+">"+current.getRight()+"\n"+display(current.getRight());
 	if(current.getRight()==null)
-	    return current.getLeft()+"<--"+current+"--> \n"+display(current.getLeft());
-	return current.getLeft()+"<--"+current+"-->"+current.getRight()+
+	    return current.getLeft()+"<"+current+"> \n"+display(current.getLeft());
+	return current.getLeft()+"<"+current+">"+current.getRight()+
 	    "\n"+display(current.getLeft())+"\n"+display(current.getRight());
     }
 
