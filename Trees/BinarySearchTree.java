@@ -199,7 +199,6 @@ public class BinarySearchTree{
     	}
     	return true;
     }
-    //ONLY CASE THAT DOESN'T WORK: REMOVE THE ROOT AND THE REPLACEMENT IS A CHILD WHICH HAS NO CHILDREN
 
     public Node findParent(Node n){
 	if(n==root)
