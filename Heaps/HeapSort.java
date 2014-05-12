@@ -8,11 +8,13 @@ public class HeapSort{
     }
 
     public static void heapify(int[] a){
-	for(int i=0;i<a.length;i++){
+	int i=0;
+	while(i<a.length){
 	    //push up children if they're bigger than their parents
 	    //gahh this should be in a while loop
 	    if(a[i]>a[parentIndex])
 		pushUp(i);
+	    i++;
 	}
     }
 
