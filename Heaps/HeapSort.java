@@ -51,7 +51,7 @@ public class HeapSort{
 	}
     }
 
-    public static void pushDown(int[]a,int index,int end){
+    public static void pushDown(int[]a, int index, int end){
 	int child=childIndex(index,end);
 	if(index!=child){
 	    swap(a,index,child);
@@ -75,7 +75,7 @@ public class HeapSort{
     }
 
     public static void main(String[] args){
-	int[] a={8,9,22,21,20,19,18,17,16,15,14,13,12,12,3,4,5,6,7,10,11};
+	int[] a={5,1,7,4,3,0,2,9,6,8};
 	System.out.println(Arrays.toString(a));
 	heapify(a);
 	System.out.println(Arrays.toString(a));
