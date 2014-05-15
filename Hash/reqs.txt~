@@ -1,0 +1,67 @@
+Hash Tables
+
+hash tables have elements with keys and values
+key:value
+
+f_hash(key) returns an index, so the keys and values can be stored in an array
+[
+0
+1
+2
+3
+4
+5
+]
+
+where each element is a linked list
+
+[
+LL0
+LL1
+LL2
+LL3
+LL4
+LL5
+]
+
+and any keys whose hash values are the same (f_fash(key1)==f_hash(key2)) will be nodes in the linked list
+
+[
+null
+node1
+node1
+node1-->node2 (collision)
+null
+node1
+]
+
+(where a node has nameOfNode=key and dataInNode=value)
+
+add to the FRONT of each linked list
+
+[
+node1
+node0-->node1
+node1
+node1-->node2
+null
+node1
+]
+
+so that add(key:value) is O(1)
+
+and access(key), to return the key's value, is O(m), where m is the number of elements in the linked list at f_hash(key)
+
+example:
+adding to index 1 (in the example array) is constant time
+access node1 at index 1 is O(2), for lack of proper notation
+
+___________________
+
+hashing runs a function on some key to return an index
+
+ex:
+f_hash('apple')
+could run
+'a'*3+'p'*1+'p'*5+'l'*17+'e'*5
+(where all integers are constants)
