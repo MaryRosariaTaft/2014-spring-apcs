@@ -1,0 +1,4 @@
+add a number
+calculate median
+remove median
+(if the median is an average, remove both)
