@@ -61,6 +61,30 @@ public class Driver{
 	}
 	System.out.println();
 
+	//emptying container
+	int size=rm.maxSize();
+	while(size>0){
+	    rm.remove();
+	    size=rm.maxSize();
+	}
+
+	//print arrays to see if it worked
+	max=rm.getMax();
+	min=rm.getMin();
+	System.out.println("Array1: ");
+	for(int i=0;i<27;i++){
+	    System.out.print(max[i]+",");
+	}
+	System.out.println();
+	System.out.println("Array2: ");
+	for(int i=0;i<27;i++){
+	    System.out.print(min[i]+",");
+	}
+	System.out.println();
+
+	//make sure exception is thrown appropriately
+	System.out.println(rm.median());
+
     }
 
 }

@@ -54,7 +54,7 @@ public class RunningMedian{
     	    grow();
     	}
     	//arrays are much bigger than the data set they contain
-    	else if(maxSize<=max.length/4){
+    	else if(maxSize<=max.length/4&&maxSize>100){
     	    shrink();
     	}
     }
@@ -178,14 +178,16 @@ public class RunningMedian{
 	if(empty()){
 	    throw new IllegalStateException();
 	}
-
+  
 	double temp=median();
 	//remove root from min heap if median is the average of both roots
 	if(maxSize==minSize){
 	    removeRoot(min,minSize);
+	    minSize--;
 	}
 	//remove root from max heap no matter what
 	removeRoot(max,maxSize);
+	maxSize--;
 	return temp;
     }
 
