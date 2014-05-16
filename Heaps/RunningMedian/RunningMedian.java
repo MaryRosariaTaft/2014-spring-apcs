@@ -27,40 +27,36 @@ public class RunningMedian{
     }
 
     public void grow(){
-	int[] temp=new int[max.length*2];
-	for(int i=0;i<maxSize;i++){
-	    temp[i]=max[i];
+	int[] tempMax=new int[max.length*2];
+	int[] tempMin=new int[min.length*2];
+	for(int i=0;i<max.length;i++){
+	    tempMax[i]=max[i];
+	    tempMin[i]=min[i];
 	}
-	max=temp;
-	int[] temp1=new int[min.length*2];
-	for(int i=0;i<minSize;i++){
-	    temp[i]=min[i];
-	}
-	min=temp1;
+	max=tempMax;
+	min=tempMin;
     }
 
     public void shrink(){
-	int[] temp=new int[max.length/2];
-	for(int i=0;i<maxSize;i++){
-	    temp[i]=max[i];
+	int[] tempMax=new int[max.length/2];
+	int[] tempMin=new int[min.length/2];
+	for(int i=0;i<max.length/2;i++){
+	    tempMax[i]=max[i];
+	    tempMin[i]=min[i];
 	}
-	max=temp;
-	int[] temp1=new int[min.length/2];
-	for(int i=0;i<minSize;i++){
-	    temp[i]=min[i];
-	}
-	min=temp1;
+	max=tempMax;
+	min=tempMin;
     }
 
     public void fixSize(){
-	//arrays are almost full
-	if(maxSize>=max.length-15){
-	    grow();
-	}
-	//arrays are much bigger than the data set they contain
-	else if(maxSize<=(max.length)/4){
-	    shrink();
-	}
+    	//arrays are almost full
+    	if(maxSize>=max.length-15){
+    	    grow();
+    	}
+    	//arrays are much bigger than the data set they contain
+    	else if(maxSize<=max.length/4){
+    	    shrink();
+    	}
     }
 
     public boolean empty(){
@@ -109,8 +105,11 @@ public class RunningMedian{
     }
 
     public void removeRoot(int[] a, int upperBound){
+	//move bottom-right leaf to root position
 	a[0]=a[upperBound-1];
+	//clear out bottom-right (for cleanness)
 	a[upperBound-1]=0;
+	//push down the displaced value into its correct position
 	pushDown(a,0,upperBound);
     }
 
@@ -146,18 +145,11 @@ public class RunningMedian{
 		min[minSize]=max[0];
 		pushUp(min,minSize);
 		minSize++;
-		//reconfigure max heap:
-		//(1) move bottom-right leaf to root
-		max[0]=max[maxSize-1];
-		//(2) remove duplicate value (not necessary since we there's a variable keeping track of the size, but it's nice and clean)
-		max[maxSize-1]=0;
-		//(3) decrement maxSize
+		//reconfigure max heap
+		removeRoot(max,maxSize);
 		maxSize--;
-		//(4) push down the displaced value into the right spot
-		//*max[maxSize] is now unoccupied and is the UPPER BOUND by which child indicies can be checked, since the upperBound parameter in pushdown() is _ex_clusive
-		pushDown(max,0,maxSize);
 	    }
-	}else{//if value>median(), add to min heap, rebalance if necessary
+	}else{//if value>median()
 	    //add to min heap
 	    min[minSize]=value;
 	    //push up to right place:
@@ -170,16 +162,9 @@ public class RunningMedian{
 		max[maxSize]=min[0];
 		pushUp(max,maxSize);
 		maxSize++;
-		//reconfigure max heap:
-		//(1) move bottom-right leaf to root
-		min[0]=min[minSize-1];
-		//(2) remove duplicate value (not necessary since we there's a variable keeping track of the size, but it's nice and clean)
-		min[minSize-1]=0;
-		//(3) decrement minSize
+		//reconfigure min heap
+		removeRoot(min,minSize);
 		minSize--;
-		//(4) push down the displaced value into the right spot
-		//*min[minSize] is now unoccupied and is the UPPER BOUND by which child indicies can be checked, since the upperBound parameter in pushdown() is _ex_clusive
-		pushDown(min,0,minSize);
 	    }
 	}
 
@@ -197,16 +182,10 @@ public class RunningMedian{
 	double temp=median();
 	//remove root from min heap if median is the average of both roots
 	if(maxSize==minSize){
-	    min[0]=min[minSize-1];
-	    min[minSize-1]=0;
-	    minSize--;
-	    pushDown(min,0,minSize);
+	    removeRoot(min,minSize);
 	}
 	//remove root from max heap no matter what
-	max[0]=max[maxSize-1];
-	max[maxSize-1]=0;
-	maxSize--;
-	pushDown(max,0,maxSize);
+	removeRoot(max,maxSize);
 	return temp;
     }
 

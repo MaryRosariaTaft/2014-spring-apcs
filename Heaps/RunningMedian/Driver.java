@@ -8,20 +8,20 @@ public class Driver{
 	RunningMedian rm=new RunningMedian();
 
 	//put values in heaps
-	for(int i=0;i<10;i++){
-	    rm.add(rand.nextInt(20));
+	for(int i=0;i<50;i++){
+	    rm.add(rand.nextInt(100));
 	}
 
 	//print out arrays
 	int[] max=rm.getMax();
 	int[] min=rm.getMin();
 	System.out.println("Array1: ");
-	for(int i=0;i<7;i++){
+	for(int i=0;i<27;i++){
 	    System.out.print(max[i]+",");
 	}
 	System.out.println();
 	System.out.println("Array2: ");
-	for(int i=0;i<7;i++){
+	for(int i=0;i<27;i++){
 	    System.out.print(min[i]+",");
 	}
 	System.out.println();
@@ -38,16 +38,25 @@ public class Driver{
 
 	System.out.println();
 
+	System.out.println("Testing grow and shrink");
+	System.out.println("Original length: "+rm.getMax().length);
+	rm.grow();
+	System.out.println("Length after grow: "+rm.getMax().length);
+	rm.shrink();
+	System.out.println("Length after shrink: "+rm.getMax().length);
+
+	System.out.println();
+
 	//print arrays to see if it worked
 	max=rm.getMax();
 	min=rm.getMin();
 	System.out.println("Array1: ");
-	for(int i=0;i<7;i++){
+	for(int i=0;i<27;i++){
 	    System.out.print(max[i]+",");
 	}
 	System.out.println();
 	System.out.println("Array2: ");
-	for(int i=0;i<7;i++){
+	for(int i=0;i<27;i++){
 	    System.out.print(min[i]+",");
 	}
 	System.out.println();
