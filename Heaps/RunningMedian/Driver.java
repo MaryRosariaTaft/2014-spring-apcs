@@ -9,7 +9,10 @@ public class Driver{
 
 	//put values in heaps
 	for(int i=0;i<50;i++){
-	    rm.add(rand.nextInt(100));
+	    int temp=rand.nextInt(100)+1;
+	    rm.add(temp);
+	    System.out.println("Adding "+temp);
+	    System.out.println(rm);
 	}
 
 	//print out arrays
