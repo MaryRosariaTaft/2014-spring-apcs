@@ -50,7 +50,7 @@ public class Driver{
 	    //System.out.println(rm);
 
 	    //20% chance of removing value
-	    if(Math.random()<0.2){
+	    if(R.nextInt(100)<20){
 		rm.remove();
 		System.out.println("Removed median(s); median is now "+rm.median()+".");
 		//System.out.println(rm);

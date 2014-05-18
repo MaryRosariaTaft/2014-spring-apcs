@@ -58,7 +58,7 @@ public class RunningMedian{
     	    grow();
     	}
     	//arrays are much bigger than the data set they contain
-    	else if(maxSize<=max.length/4&&maxSize>100){
+    	else if(maxSize<=max.length/4&&maxSize>50){
     	    shrink();
     	}
     }
@@ -260,5 +260,64 @@ public class RunningMedian{
         ans+="]\n";
 	return ans;
     }
+
+    //////////////////////////////////
+    //additional code for keeping a sorted list
+    //clearly not functional yet
+
+    // private int[] list=new int[30];
+    // private int listSize=0;
+
+    // public void growList(){
+    // 	int[] temp=new int[list.length*2];
+    // 	for(int i=0;i<list.length;i++){
+    // 	    temp[i]=list[i];
+    // 	}
+    // 	list=temp;
+    // }
+
+    // public void shrinkList(){
+    // 	int[] temp=new int[list.length/2];
+    // 	for(int i=0;i<list.length/2;i++){
+    // 	    temp[i]=list[i];
+    // 	}
+    // 	list=temp;
+    // }
+
+    // public void fixListSize(){
+    // 	if(listSize>=list.length-15){
+    // 	    growList();
+    // 	}
+    // 	else if(listSize<=list.length/4&&listSize>50){
+    // 	    shrinkList();
+    // 	}
+    // }
+
+    // public void addToList(int value){
+    // 	fixListSize();
+    // 	int i=0;
+    // 	while(list[i]<=value){
+    // 	    i++;
+    // 	}
+    // 	for(int j=listSize;j>i;j--){
+    // 	    swap(list,j,j-1);
+    // 	}
+    // 	list[i]=value;
+    // }
+
+    // public void removeFromList(){
+    // 	fixListSize();
+    // 	if(listSize%2==0){
+    // 	    //remove listSize/2 and listSize/2-1
+    // 	}
+    // }
+
+    // public int[] getList(){
+    // 	return list;
+    // }
+
+    // public void shift(int index, int spaces, String direction){
+
+    // }
 
 }
