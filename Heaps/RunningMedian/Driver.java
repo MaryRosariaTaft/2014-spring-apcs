@@ -8,6 +8,7 @@ public class Driver{
 	for(int seed=1;seed<args.length;seed++){
 	    Random R=new Random((int)(Integer.parseInt(args[seed])));
 
+	    System.out.println();
 	    System.out.println("Test 1");
 	    System.out.println();
 	    test1(R,size);
@@ -30,7 +31,7 @@ public class Driver{
 	    rm.add(temp);
 	    System.out.print("Added "+temp+"; ");
 	    System.out.println("median is now "+rm.median()+".");
-	    System.out.println(rm);
+	    //System.out.println(rm);
 	}
 
     }
@@ -46,13 +47,13 @@ public class Driver{
 	    rm.add(temp);
 	    System.out.print("Added "+temp+"; ");
 	    System.out.println("median is now "+rm.median()+".");
-	    System.out.println(rm);
+	    //System.out.println(rm);
 
 	    //20% chance of removing value
 	    if(Math.random()<0.2){
 		rm.remove();
-		System.out.println("Removed median(s).");
-		System.out.println(rm);
+		System.out.println("Removed median(s); median is now "+rm.median()+".");
+		//System.out.println(rm);
 	    }
 
 	}

@@ -1,6 +1,10 @@
+import java.io.*;
+
 public class RunningMedian{
 
-    private int[] max, min; //roots of each: max of the smaller half, min of the larger half
+    private int[] max, min;
+    //root of max (max[0]) is the largest of the smaller half of numbers
+    //root of min (min[0]) is the smallest of the larger half of numbers
     private int maxSize, minSize;
 
     public RunningMedian(){
@@ -149,6 +153,8 @@ public class RunningMedian{
     public void add(int value){
 
 	fixSize();
+
+
 
 	//if adding first element
 	if(maxSize==0){
