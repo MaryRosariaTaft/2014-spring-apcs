@@ -1,23 +1,30 @@
 import java.io.*;
 import java.util.*;
 
-public class Driver{
+public class Sorry{
 
     public static void main(String[] args){
 	int size=(int)(Integer.parseInt(args[0]));
 	for(int seed=1;seed<args.length;seed++){
 	    Random R=new Random((int)(Integer.parseInt(args[seed])));
 
+	    System.out.println("__________________________");
 	    System.out.println();
-	    System.out.println("Test 1");
+	    System.out.println("TESTS USING SEED #"+seed);
+	    System.out.println("__________________________");
+	    System.out.println();
+
+	    System.out.println("Test 1:");
 	    System.out.println();
 	    test1(R,size);
 
-	    System.out.println("__________________________");
+	    System.out.println("--------------------------");
 	    System.out.println();
-	    System.out.println("Test 2");
+
+	    System.out.println("Test 2:");
 	    System.out.println();
 	    test2(R,size);
+	    System.out.println();
 	}
     }
 
