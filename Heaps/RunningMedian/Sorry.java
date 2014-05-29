@@ -58,8 +58,12 @@ public class Sorry{
 
 	    //20% chance of removing value
 	    if(R.nextInt(100)<20){
-		rm.remove();
-		System.out.println("Removed median(s); median is now "+rm.median()+".");
+		try{
+		    rm.remove();
+		    System.out.println("Removed median(s); median is now "+rm.median()+".");
+		}catch(IllegalStateException e){
+		    //System.out.println("Tried to run remove() on an empty data set; failed");
+		}
 		//System.out.println(rm);
 	    }
 
