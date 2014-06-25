@@ -1,9 +1,8 @@
 Homework, Fall 2013
 ==================
 
-A.P. Computer Science
-------------------
+### A.P. Computer Science ###
 
-**Teacher: Mr. Konstantinovich**
+Teacher: Mr. Konstantinovich
 
-**Languages: Java**
+Languages: Java
